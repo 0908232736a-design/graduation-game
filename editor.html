@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>任務編輯器 - 實境RPG</title>
+    <link rel="stylesheet" href="css/editor.css">
+</head>
+<body>
+    <div class="editor-container">
+        <!-- 頂部導航 -->
+        <header class="editor-header">
+            <h1>✏️ 任務編輯器</h1>
+            <div class="header-actions">
+                <button id="backBtn" class="btn btn-secondary">← 返回遊戲</button>
+            </div>
+        </header>
+
+        <div class="editor-layout">
+            <!-- 左側：任務列表 -->
+            <aside class="quest-sidebar">
+                <h2>任務列表</h2>
+                <button id="newQuestBtn" class="btn btn-primary">+ 新增任務</button>
+                <div id="questListPanel" class="quest-list-panel">
+                    <!-- 任務列表會動態生成 -->
+                </div>
+            </aside>
+
+            <!-- 右側：編輯器 -->
+            <main class="editor-main">
+                <div id="editorContent" class="editor-content">
+                    <div class="welcome-message">
+                        <p>👈 從左邊選擇一個任務進行編輯，或建立新任務</p>
+                    </div>
+                </div>
+            </main>
+        </div>
+
+        <!-- 編輯表單 (隱藏) -->
+        <div id="editForm" class="edit-form" style="display: none;">
+            <div class="form-section">
+                <h3>基本信息</h3>
+                <div class="form-group">
+                    <label for="questName">任務名稱 *</label>
+                    <input type="text" id="questName" placeholder="輸入任務名稱" required>
+                </div>
+
+                <div class="form-group">
+                    <label for="questDescription">任務描述</label>
+                    <textarea id="questDescription" placeholder="輸入任務描述"></textarea>
+                </div>
+
+                <div class="form-group">
+                    <label for="questReward">獎勵</label>
+                    <input type="text" id="questReward" placeholder="例如：經驗值 100 金幣 50">
+                </div>
+            </div>
+
+            <div class="form-section">
+                <h3>位置設置</h3>
+                <div class="location-controls">
+                    <button id="getCurrentLocation" class="btn btn-info">📍 使用當前位置</button>
+                </div>
+
+                <div class="form-group">
+                    <label for="questLat">緯度 *</label>
+                    <input type="number" id="questLat" placeholder="例如：25.033" step="0.00001" required>
+                </div>
+
+                <div class="form-group">
+                    <label for="questLng">經度 *</label>
+                    <input type="number" id="questLng" placeholder="例如：121.565" step="0.00001" required>
+                </div>
+
+                <div class="form-group">
+                    <label for="questRadius">觸發半徑 (米) *</label>
+                    <input type="number" id="questRadius" value="200" min="50" max="1000" required>
+                </div>
+
+                <div id="locationPreview" class="location-preview">
+                    <p id="previewText">未設置位置</p>
+                </div>
+            </div>
+
+            <div class="form-section">
+                <h3>任務內容</h3>
+                <div class="form-group">
+                    <label for="questObjective">目標 *</label>
+                    <textarea id="questObjective" placeholder="輸入任務目標" required></textarea>
+                </div>
+
+                <div class="form-group">
+                    <label for="questHint">提示</label>
+                    <textarea id="questHint" placeholder="輸入幫助提示"></textarea>
+                </div>
+            </div>
+
+            <div class="form-actions">
+                <button id="saveBtnForm" class="btn btn-success">💾 保存任務</button>
+                <button id="deleteBtn" class="btn btn-danger">🗑️ 刪除任務</button>
+                <button id="cancelBtn" class="btn btn-secondary">取消</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- 認證模態框 -->
+    <div id="authModal" class="modal" style="display: none;">
+        <div class="modal-content auth-modal">
+            <h2>🔐 編輯器訪問</h2>
+            <p>這個編輯器只供擁有者使用。</p>
+            <div class="form-group">
+                <label for="editorPassword">輸入編輯器密碼:</label>
+                <input type="password" id="editorPassword" placeholder="輸入密碼">
+            </div>
+            <div class="auth-actions">
+                <button id="authBtn" class="btn btn-primary">驗證</button>
+                <button id="authCancelBtn" class="btn btn-secondary">返回遊戲</button>
+            </div>
+        </div>
+    </div>
+
+    <script src="js/storage.js"></script>
+    <script src="js/editor.js"></script>
+</body>
+</html>

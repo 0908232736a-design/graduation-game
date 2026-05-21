@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>實境RPG - 任務冒險</title>
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+    <div class="game-container">
+        <!-- 頭部導航 -->
+        <header class="game-header">
+            <h1>🗺️ 位置冒險</h1>
+            <div class="header-controls">
+                <button id="editBtn" class="btn btn-editor">編輯任務</button>
+                <button id="settingsBtn" class="btn btn-settings">⚙️</button>
+            </div>
+        </header>
+
+        <!-- 主遊戲區域 -->
+        <main class="game-main">
+            <!-- 位置信息 -->
+            <section class="location-section">
+                <div id="locationStatus" class="location-status">
+                    <p id="statusText">正在取得您的位置...</p>
+                    <p id="locationText" class="location-info">等待位置...</p>
+                    <div id="distanceInfo" class="distance-info" style="display: none;">
+                        <p>距離最近任務: <span id="nearestDistance">--</span> 公里</p>
+                    </div>
+                </div>
+            </section>
+
+            <!-- 活躍任務 -->
+            <section class="active-quests">
+                <h2>📍 附近任務</h2>
+                <div id="questList" class="quest-list">
+                    <p class="empty-message">沒有附近的任務</p>
+                </div>
+            </section>
+
+            <!-- 進行中的任務 -->
+            <section class="in-progress-quests">
+                <h2>⚔️ 進行中的任務</h2>
+                <div id="inProgressList" class="quest-list">
+                    <p class="empty-message">沒有進行中的任務</p>
+                </div>
+            </section>
+
+            <!-- 已完成任務 -->
+            <section class="completed-quests">
+                <h2>✅ 已完成任務</h2>
+                <div id="completedList" class="quest-list">
+                    <p class="empty-message">還沒有完成任務</p>
+                </div>
+            </section>
+        </main>
+
+        <!-- 任務詳情模態框 -->
+        <div id="questModal" class="modal" style="display: none;">
+            <div class="modal-content">
+                <span class="close">&times;</span>
+                <h2 id="questTitle"></h2>
+                <div id="questDetails"></div>
+                <div class="modal-actions">
+                    <button id="acceptBtn" class="btn btn-primary" style="display: none;">接受任務</button>
+                    <button id="completeBtn" class="btn btn-success" style="display: none;">完成任務</button>
+                    <button id="abandonBtn" class="btn btn-danger" style="display: none;">放棄任務</button>
+                </div>
+            </div>
+        </div>
+
+        <!-- 設定模態框 -->
+        <div id="settingsModal" class="modal" style="display: none;">
+            <div class="modal-content">
+                <span class="close">&times;</span>
+                <h2>⚙️ 設定</h2>
+                <div class="settings-content">
+                    <div class="setting-item">
+                        <label for="triggerRadius">任務觸發半徑 (米):</label>
+                        <input type="range" id="triggerRadius" min="50" max="500" value="200" step="50">
+                        <span id="radiusValue">200</span>
+                    </div>
+                    <div class="setting-item">
+                        <label for="updateInterval">位置更新間隔 (秒):</label>
+                        <input type="range" id="updateInterval" min="5" max="60" value="10" step="5">
+                        <span id="intervalValue">10</span>
+                    </div>
+                    <button id="clearDataBtn" class="btn btn-danger">清除所有數據</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="js/storage.js"></script>
+    <script src="js/location.js"></script>
+    <script src="js/game.js"></script>
+</body>
+</html>
